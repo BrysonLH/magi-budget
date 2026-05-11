@@ -1,19 +1,49 @@
 * { box-sizing: border-box; }
+
 html, body, #root {
   margin: 0;
   padding: 0;
   background: #0a0805;
   min-height: 100vh;
+  min-height: 100dvh;
 }
+
 body {
   font-family: 'IBM Plex Mono', 'Courier New', monospace;
   -webkit-font-smoothing: antialiased;
   -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  overscroll-behavior-y: contain;
 }
-input, select, button, textarea { font-family: inherit; }
+
+#root {
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+}
+
+input, select, button, textarea {
+  font-family: inherit;
+  font-size: 16px; /* prevents iOS zoom on focus */
+}
+
+button { touch-action: manipulation; }
+
 @keyframes magi_blink { 50% { opacity: 0; } }
+@keyframes magi_spin { to { transform: rotate(360deg); } }
+@keyframes magi_slide_up {
+  from { transform: translate(-50%, 100%); opacity: 0; }
+  to { transform: translate(-50%, 0); opacity: 1; }
+}
+
 input::placeholder { color: #7a4500; }
+
 input[type='date']::-webkit-calendar-picker-indicator {
   filter: invert(0.5) sepia(1) hue-rotate(-10deg);
   cursor: pointer;
 }
+
+/* Hide scrollbars on horizontal nav */
+nav::-webkit-scrollbar { display: none; }
+nav { scrollbar-width: none; }
