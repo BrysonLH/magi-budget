@@ -4,21 +4,23 @@ import { useTable, useGoal, useCategories, useBudgetLimits } from '../hooks/useS
 import { usePullToRefresh } from '../hooks/usePullToRefresh'
 import { theme, INCOME_TYPES, PALETTE, fmt, today, currentMonth } from '../lib/theme'
 import { exportAll } from '../lib/csv'
+import { useDemoData } from '../hooks/useDemoData'
 import {
   PieChart, Pie, Cell, Tooltip, ResponsiveContainer,
   BarChart, Bar, XAxis, YAxis, CartesianGrid, AreaChart, Area,
 } from 'recharts'
 
-export default function MagiBudget({ session }) {
+export default function MagiBudget({ session, demoMode = false }) {
   const userId = session.user.id
   const userEmail = session.user.email
 
-  const income = useTable('income', userId)
-  const expenses = useTable('expenses', userId)
-  const savings = useTable('savings', userId)
-  const goalState = useGoal(userId)
-  const cats = useCategories(userId)
-  const limits = useBudgetLimits(userId)
+  const demoData = demoMode ? useDemoData() : null
+  const income = demoMode ? demoData.income : useTable('income', userId)
+  const expenses = demoMode ? demoData.expenses : useTable('expenses', userId)
+  const savings = demoMode ? demoData.savings : useTable('savings', userId)
+  const goalState = demoMode ? demoData.goalState : useGoal(userId)
+  const cats = demoMode ? demoData.cats : useCategories(userId)
+  const limits = demoMode ? demoData.limits : useBudgetLimits(userId)
 
   const [tab, setTab] = useState('DASHBOARD')
   const [time, setTime] = useState(new Date())
