@@ -9,6 +9,9 @@
 ![PWA](https://img.shields.io/badge/PWA-Installable-5A0FC8?style=flat-square&logo=pwa&logoColor=white)
 
 **[→ Live Demo](https://magimoney.netlify.app)**
+![MAGI Money Dashboard](public/screenshot.png)
+
+
 
 ---
 
